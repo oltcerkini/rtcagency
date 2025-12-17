@@ -1,4 +1,10 @@
 <!--Main Slider Start-->
+@php
+    // Fetch active slides from database, ordered by 'order' column
+    $slides = \App\Models\Slider::active()->ordered()->get();
+@endphp
+
+@if($slides->count() > 0)
 <section class="main-slider main-slider-style1">
     <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true,
                 "effect": "fade",
@@ -18,20 +24,20 @@
         }'>
 
         <div class="swiper-wrapper">
-
+            @foreach($slides as $slide)
             <!--Start Single Swiper Slide-->
             <div class="swiper-slide">
-                <div class="image-layer" style="background-image: url({{ asset('assets/images/headphones.jpg') }});">
+                <div class="image-layer" style="background-image: url({{ Storage::url($slide->image) }});">
                 </div>
                 <div class="main-slider-style1__gradient-bg"></div>
                 <div class="shape1 wow slideInLeft" data-wow-delay="100ms" data-wow-duration="2500ms">
-                    <img class="float-bob-y" src="{{ asset('assets/images/headphones.jpg') }}" alt="">
+                    <img class="float-bob-y" src="{{ Storage::url($slide->image) }}" alt="{{ $slide->title }}">
                 </div>
                 <div class="shape2 wow slideInUp" data-wow-delay="100ms" data-wow-duration="2500ms">
-                    <img class="float-bob-x" src="{{ asset('assets/images/headphones.jpg') }}" alt="">
+                    <img class="float-bob-x" src="{{ Storage::url($slide->image) }}" alt="{{ $slide->title }}">
                 </div>
                 <div class="shape3 wow slideInUp" data-wow-delay="100ms" data-wow-duration="2500ms">
-                    <img class="float-bob" src="{{ asset('assets/images/headphones.jpg') }}" alt="">
+                    <img class="float-bob" src="{{ Storage::url($slide->image) }}" alt="{{ $slide->title }}">
                 </div>
                 <div class="container">
                     <div class="row">
@@ -40,21 +46,23 @@
                                 <div class="main-slider-content__inner">
                                     <div class="big-title">
                                         <h2>
-                                            <span>Global</span><br> Multilingual<br> Solutions
+                                            {!! nl2br(e($slide->title)) !!}
                                         </h2>
                                     </div>
                                     <div class="text">
                                         <p>
-                                            Professional Translation, Call-Center Support & Technical Services
+                                            {{ $slide->subtitle }}
                                         </p>
                                     </div>
+                                    @if($slide->button_text && $slide->button_link)
                                     <div class="btn-box">
-                                        <a class="btn-one">
+                                        <a href="{{ $slide->button_link }}" class="btn-one">
                                             <span class="txt">
-                                                Discover More<i class="icon-plus"></i>
+                                                {{ $slide->button_text }}<i class="icon-plus"></i>
                                             </span>
                                         </a>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -62,97 +70,9 @@
                 </div>
             </div>
             <!--End Single Swiper Slide-->
-
-            <!--Start Single Swiper Slide-->
-            <div class="swiper-slide">
-                <div class="image-layer" style="background-image: url({{ asset('assets/images/youth-day-celebration-black-white.jpg') }});">
-                </div>
-                <div class="main-slider-style1__gradient-bg"></div>
-                <div class="shape1 wow slideInLeft" data-wow-delay="100ms" data-wow-duration="2500ms">
-                    <img class="float-bob-y" src="{{ asset('assets/images/youth-day-celebration-black-white.jpg') }}" alt="">
-                </div>
-                <div class="shape2 wow slideInUp" data-wow-delay="100ms" data-wow-duration="2500ms">
-                    <img class="float-bob-x" src="{{ asset('assets/images/youth-day-celebration-black-white.jpg') }}" alt="">
-                </div>
-                <div class="shape3 wow slideInUp" data-wow-delay="100ms" data-wow-duration="2500ms">
-                    <img class="float-bob" src="{{ asset('assets/images/youth-day-celebration-black-white.jpg') }}" alt="">
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="main-slider-content">
-                                <div class="main-slider-content__inner">
-                                    <div class="big-title">
-                                        <h2>
-                                           Your <span>Language.</span><br>Our Expertise.<br>  Global Results.
-                                        </h2>
-                                    </div>
-                                    <div class="text">
-                                        <p>
-                                            Professional Translation, Call-Center Support & Technical Services
-                                        </p>
-                                    </div>
-                                    <div class="btn-box">
-                                        <a class="btn-one">
-                                            <span class="txt">
-                                                Discover More<i class="icon-plus"></i>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--End Single Swiper Slide-->
-
-            <!--Start Single Swiper Slide-->
-            <div class="swiper-slide">
-                <div class="image-layer" style="background-image: url({{ asset('assets/images/coworkers.jpg') }});">
-                </div>
-                <div class="main-slider-style1__gradient-bg"></div>
-                <div class="shape1 wow slideInLeft" data-wow-delay="100ms" data-wow-duration="2500ms">
-                    <img class="float-bob-y" src="{{ asset('assets/images/coworkers.jpg') }}" alt="">
-                </div>
-                <div class="shape2 wow slideInUp" data-wow-delay="100ms" data-wow-duration="2500ms">
-                    <img class="float-bob-x" src="{{ asset('assets/images/coworkers.jpg') }}" alt="">
-                </div>
-                <div class="shape3 wow slideInUp" data-wow-delay="100ms" data-wow-duration="2500ms">
-                    <img class="float-bob" src="{{ asset('assets/images/coworkers.jpg') }}" alt="">
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="main-slider-content">
-                                <div class="main-slider-content__inner">
-                                    <div class="big-title">
-                                        <h2>
-                                            We manage the call.</span><br>You manage growth.
-                                            
-                                        </h2>
-                                    </div>
-                                    <div class="text">
-                                        <p>
-                                            Professional Translation, Call-Center Support & Technical Services
-
-                                        </p>
-                                    </div>
-                                    <div class="btn-box">
-                                        <a class="btn-one">
-                                            <span class="txt">
-                                                Discover More <i class="icon-plus"></i>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--End Single Swiper Slide-->
+            @endforeach
         </div>
+        
         <!-- If we need navigation buttons -->
         <div class="swiper-pagination" id="main-slider-pagination"></div>
         <div class="main-slider__nav" style="display: none;">
@@ -166,4 +86,37 @@
 
     </div>
 </section>
+@else
+<!-- Fallback if no slides exist -->
+<section class="main-slider main-slider-style1">
+    <div class="swiper-container thm-swiper__slider">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="image-layer" style="background-image: url({{ asset('assets/images/headphones.jpg') }});">
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="main-slider-content">
+                                <div class="main-slider-content__inner">
+                                    <div class="big-title">
+                                        <h2>
+                                            Add slides from admin panel
+                                        </h2>
+                                    </div>
+                                    <div class="text">
+                                        <p>
+                                            Go to Filament admin to add slider content
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endif
 <!--Main Slider End-->
