@@ -63,41 +63,26 @@
     </li>
 
     <li class="dropdown">
-        <a href="{{ route('services.allServices') }}">{{ __('menu.services') }}</a>
-        <ul>
-            <li><a href="{{ route('services.allServices') }}">{{ __('menu.all_services') }}</a></li>
+    <a href="{{ route('home') }}#services">{{ __('menu.services') }}</a>
+    <ul>
+        <li><a href="{{ route('home') }}#services">{{ __('menu.all_services') }}</a></li>
+        
+        @php
+            // Fetch active services from the database, ordered correctly
+            $dynamicServices = \App\Models\Service::where('is_active', true)
+                ->orderBy('sort_order')
+                ->get();
+        @endphp
+        
+        @foreach($dynamicServices as $service)
             <li>
-                <a href="{{ route('services.translation') }}">
-                    {{ __('menu.translation') }}
+                <a href="{{ route('service.show', $service->id) }}">
+                    {{ $service->title }}
                 </a>
             </li>
-            <li>
-                <a href="{{ route('services.editing-proofreading') }}">
-                    {{ __('menu.editing') }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('services.tep-workflow') }}">
-                    {{ __('menu.tep') }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('services.industry-solutions') }}">
-                    {{ __('menu.industry') }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('services.call-center') }}">
-                    {{ __('menu.call_center') }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('services.programming-support') }}">
-                    {{ __('menu.programming') }}
-                </a>
-            </li>
-        </ul>
-    </li>
+        @endforeach
+    </ul>
+</li>
 
     <li>
         <a href="{{ route('contact') }}">{{ __('menu.contact') }}</a>

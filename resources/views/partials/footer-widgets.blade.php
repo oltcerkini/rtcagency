@@ -38,12 +38,7 @@
                         About Us
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('services.allServices') }}">
-                        <span class="icon-right-arrow"></span>
-                        All Services
-                    </a>
-                </li>
+                
                 <li>
                     <a href="{{ route('contact') }}">
                         <span class="icon-right-arrow"></span>
@@ -71,43 +66,22 @@
         </div>
         <div class="footer-widget-links">
             <ul>
-                <li>
-                    <a href="{{ route('services.translation') }}">
-                        <span class="icon-right-arrow"></span>
-                        Translation Services
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('services.editing-proofreading') }}">
-                        <span class="icon-right-arrow"></span>
-                        Editing & Proofreading
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('services.tep-workflow') }}">
-                        <span class="icon-right-arrow"></span>
-                        TEP Workflow
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('services.industry-solutions') }}">
-                        <span class="icon-right-arrow"></span>
-                        Industry-Specific Linguistic Solutions
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('services.call-center') }}">
-                        <span class="icon-right-arrow"></span>
-                        Call-Center Services
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('services.programming-support') }}">
-                        <span class="icon-right-arrow"></span>
-                        Programming & Technical Support
-                    </a>
-                </li>
-            </ul>
+    @php
+        // Fetch active services from the database, ordered correctly
+        $dynamicServices = \App\Models\Service::where('is_active', true)
+            ->orderBy('sort_order')
+            ->get();
+    @endphp
+    
+    @foreach($dynamicServices as $service)
+        <li>
+            <a href="{{ route('service.show', $service->id) }}">
+                <span class="icon-right-arrow"></span>
+                {{ $service->title }}
+            </a>
+        </li>
+    @endforeach
+</ul>
         </div>
     </div>
 </div>
@@ -141,9 +115,7 @@
 
             <div class="footer-menu">
                 <ul>
-                    <li>
-                        <a href="{{ route('services.allServices') }}">All Services</a>
-                    </li>
+                   
                     <li>
                         <a href="{{ route('contact') }}">Contact Us</a>
                     </li>

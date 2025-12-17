@@ -22,4 +22,6 @@
     <!--Start Features Style1-->
     @include('sections.features')
     <!--End Features Style1-->
+
+    @include('sections.projects')
 @endsection

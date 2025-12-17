@@ -26,6 +26,9 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->resources([
+            \App\Filament\Resources\ServiceResource::class,
+        ])
             ->colors([
                 'primary' => Color::hex('#4287e3'),
                 'gray' => Color::Zinc,

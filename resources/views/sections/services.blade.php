@@ -1,148 +1,69 @@
 <!--Start Service Style1-->
-    <section class="service-style1">
-        <div class="container">
-            <div class="sec-title text-center">
-                <div class="sec-title__shape item-center">
-                    <img src="{{ asset('assets/images/shapes/sec-title-shape-1.png') }}" alt="">
-                </div>
-                <h2 class="mb-5">
-                    Our Comprehensive Range of Services
-                </h2>
+@php
+    // Fetch services from database (same as projects)
+    $services = App\Models\Service::published()->ordered()->take(6)->get();
+@endphp
+
+<section class="services-style1-area" id="services">
+    <div class="container">
+        <div class="sec-title text-center">
+            <div class="sec-title__shape">
+                <img src="{{ asset('assets/images/shapes/sec-title-shape-1.png') }}" alt="Decorative shape">
             </div>
-            
-            <div class="row g-4">
-                <!-- Translation Services -->
-                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms" data-wow-duration="1500ms">
-                    <div class="single-service-style1 h-100">
-                        <div class="single-service-style1__bg"
-                            style="background-image: url({{ asset('assets/images/shapes/service-style1-shape-1.png') }});">
-                        </div>
-                        <div class="icon-box">
-                            <span class="icon-web-development"></span>
-                            <div class="round-box"></div>
-                        </div>
-                        <div class="title-box">
-                            <h3><a href="{{ route('services.translation') }}">Translation Services</a></h3>
-                        </div>
-                        <div class="text">
-                            <p>We deliver accurate, culturally correct translations handled by native linguists. Every project is clear, precise, and adapted to your industry needs.</p>
-                        </div>
-                        <div class="btn-box mt-3">
-                            <a href="{{ route('services.translation') }}"><i class="icon-plus"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Editing & Proofreading -->
-                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
-                    <div class="single-service-style1 h-100">
-                        <div class="single-service-style1__bg"
-                            style="background-image: url({{ asset('assets/images/shapes/service-style1-shape-1.png') }});">
-                        </div>
-                        <div class="icon-box">
-                            <span class="icon-consulting"></span>
-                            <div class="round-box"></div>
-                        </div>
-                        <div class="title-box">
-                            <h3><a href="{{ route('services.editing-proofreading') }}">Editing & Proofreading</a></h3>
-                        </div>
-                        <div class="text">
-                            <p>Our team reviews your text for grammar, flow, and consistency, ensuring your content is polished, professional, and ready for use.</p>
-                        </div>
-                        <div class="btn-box mt-3">
-                            <a href="{{ route('services.editing-proofreading') }}"><i class="icon-plus"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TEP Workflow -->
-                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms" data-wow-duration="1500ms">
-                    <div class="single-service-style1 h-100">
-                        <div class="single-service-style1__bg"
-                            style="background-image: url({{ asset('assets/images/shapes/service-style1-shape-1.png') }});">
-                        </div>
-                        <div class="icon-box">
-                            <span class="icon-design"></span>
-                            <div class="round-box"></div>
-                        </div>
-                        <div class="title-box">
-                            <h3><a href="{{ route('services.tep-workflow') }}">TEP Workflow</a></h3>
-                        </div>
-                        <div class="text">
-                            <p>For high-accuracy documents, we provide a full Translation–Editing–Proofreading cycle with multiple linguists to ensure flawless quality.</p>
-                        </div>
-                        <div class="btn-box mt-3">
-                            <a href="{{ route('services.tep-workflow') }}"><i class="icon-plus"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Industry-Specific Solutions -->
-                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
-                    <div class="single-service-style1 h-100">
-                        <div class="single-service-style1__bg"
-                            style="background-image: url({{ asset('assets/images/shapes/service-style1-shape-1.png') }});">
-                        </div>
-                        <div class="icon-box">
-                            <span class="icon-digital"></span>
-                            <div class="round-box"></div>
-                        </div>
-                        <div class="title-box">
-                            <h3><a href="{{ route('services.industry-solutions') }}">Industry-Specific Linguistic Solutions</a></h3>
-                        </div>
-                        <div class="text">
-                            <p>We offer specialized language support for general, financial, medical, technical, and legal sectors, ensuring correct terminology and compliance.</p>
-                        </div>
-                        <div class="btn-box mt-3">
-                            <a href="{{ route('services.industry-solutions') }}"><i class="icon-plus"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Call-Center Services -->
-                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="500ms" data-wow-duration="1500ms">
-                    <div class="single-service-style1 h-100">
-                        <div class="single-service-style1__bg"
-                            style="background-image: url({{ asset('assets/images/shapes/service-style1-shape-1.png') }});">
-                        </div>
-                        <div class="icon-box">
-                            <span class="icon-digital"></span>
-                            <div class="round-box"></div>
-                        </div>
-                        <div class="title-box">
-                            <h3><a href="{{ route('services.call-center') }}">Call-Center Services</a></h3>
-                        </div>
-                        <div class="text">
-                            <p>Our multilingual call-center team handles inbound and outbound communication with professionalism, trained in CRM tools and customer engagement.</p>
-                        </div>
-                        <div class="btn-box mt-3">
-                            <a href="{{ route('services.call-center') }}"><i class="icon-plus"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Programming & Technical Support -->
-                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="600ms" data-wow-duration="1500ms">
-                    <div class="single-service-style1 h-100">
-                        <div class="single-service-style1__bg"
-                            style="background-image: url({{ asset('assets/images/shapes/service-style1-shape-1.png') }});">
-                        </div>
-                        <div class="icon-box">
-                            <span class="icon-digital"></span>
-                            <div class="round-box"></div>
-                        </div>
-                        <div class="title-box">
-                            <h3><a href="{{ route('services.programming-support') }}">Programming & Technical Support</a></h3>
-                        </div>
-                        <div class="text">
-                            <p>We provide web development, software assistance, troubleshooting, and multilingual integration to help businesses operate smoothly.</p>
-                        </div>
-                        <div class="btn-box mt-3">
-                            <a href="{{ route('services.programming-support') }}"><i class="icon-plus"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h2>Our Services</h2>
+            <p>Professional solutions for your business needs</p>
         </div>
-    </section>
-    <!--End Service Style1-->
+        
+        @if($services->count() > 0)
+        <div class="row">
+            @foreach($services as $service)
+            <div class="col-xl-4 col-lg-4 col-md-6">
+                <div class="single-service-style1" 
+                     onclick="window.location.href='{{ route('service.show', $service->id) }}'"
+                     style="border-top-color: #3498db;">
+                    <div class="img-holder">
+                        @if($service->image)
+                        <img src="{{ Storage::url($service->image) }}" 
+                             alt="{{ $service->title }}">
+                        @else
+                        <img src="{{ asset('assets/images/default-service.jpg') }}" 
+                             alt="{{ $service->title }}">
+                        @endif
+                        <div class="icon-holder">
+                            @if($service->icon)
+                                <i class="{{ $service->icon }}" style="color: #3498db;"></i>
+                            @else
+                                <i class="fas fa-cog" style="color: #3498db;"></i>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="text-holder">
+                        <h3><a href="{{ route('service.show', $service->id) }}">{{ $service->title }}</a></h3>
+                        <p>{{ \Illuminate\Support\Str::limit($service->description, 100) }}</p>
+                        <div class="read-more-button">
+                            <a href="{{ route('service.show', $service->id) }}">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        
+        <div class="service-view-all text-center">
+            <a href="{{ route('home') }}#services" class="btn-one">
+                <span class="txt">
+                    View All Services
+                    <i class="fas fa-plus"></i>
+                </span>
+            </a>
+        </div>
+        @else
+        <div class="text-center py-5">
+            <p>No services available yet. Add services from the admin panel.</p>
+        </div>
+        @endif
+    </div>
+</section>
+<!--End Service Style1-->
