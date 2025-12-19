@@ -13,11 +13,19 @@
 <section class="case-style1">
     <div class="container">
         <div class="sec-title text-center">
-            <div class="sec-title__shape item-center">
-                <img src="{{ asset('assets/images/shapes/sec-title-shape-1.png') }}" alt="Decorative shape">
-            </div>
-            <h2>Our partnership with DIV</h2>
-        </div>
+    <div class="sec-title__shape item-center">
+        <img src="{{ asset('assets/images/shapes/sec-title-shape-1.png') }}" alt="Decorative shape">
+    </div>
+    <h2>
+        @if(session('locale') === 'de')
+            Unsere Partnerschaften
+        @elseif(session('locale') === 'fr')
+            Nos Partenariats
+        @else
+            Our Partnerships
+        @endif
+    </h2>
+</div>
         
         @php
             // Fetch ALL projects from database (removed the ->take(6) limit)
@@ -34,16 +42,16 @@
                     <div class="img-holder">
                         <div class="image-wrapper">
                             <img src="{{ Storage::url($project->image_1) }}" 
-                                 alt="{{ $project->title }}"
-                                 class="float-bob-y">
+     alt="{{ $project->translated_title }}"
+     class="float-bob-y">
                         </div>
                     </div>
                     <div class="title-holder">
                         <div class="single-case-style1__bg" 
                              style="background-image: url({{ asset('assets/images/shapes/single-case-style1-shape1.png') }});"></div>
                         <div class="count-box">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</div>
-                        <div class="category-box">{{ $project->category }}</div>
-                        <h3><a href="{{ route('project.show', $project->id) }}">{{ $project->title }}</a></h3>
+                       <div class="category-box">{{ $project->translated_category }}</div>
+<h3><a href="{{ route('project.show', $project->id) }}">{{ $project->translated_title }}</a></h3>
                     </div>
                 </div>
                 @endforeach
@@ -66,10 +74,18 @@
         </div>
         
         @else
-        <div class="text-center py-5">
-            <p>No projects available yet. Add projects from the admin panel.</p>
-        </div>
+<div class="text-center py-5">
+    <p>
+        @if(session('locale') === 'de')
+            Noch keine Projekte verfügbar. Fügen Sie Projekte vom Admin-Panel hinzu.
+        @elseif(session('locale') === 'fr')
+            Aucun projet disponible pour le moment. Ajoutez des projets depuis le panneau d'administration.
+        @else
+            No projects available yet. Add projects from the admin panel.
         @endif
+    </p>
+</div>
+@endif
     </div>
 </section>
 <!--End case Style1 Area-->

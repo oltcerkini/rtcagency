@@ -28,15 +28,23 @@ class SliderResource extends Resource
             ->schema([
                 Forms\Components\Section::make('Slide Content')
                     ->schema([
+                        // Add translation key field
+                        Forms\Components\TextInput::make('translation_key')
+                            ->label('Translation Key')
+                            ->helperText('Used for language files (e.g., slide1, slide2, slide3)')
+                            ->maxLength(50)
+                            ->placeholder('slide1'),
+                        
                         Forms\Components\TextInput::make('title')
                             ->required()
                             ->maxLength(255)
-                            ->label('Slide Title'),
+                            ->label('Slide Title (English)')
+                            ->helperText('This is the English version. German/French translations are in language files.'),
                         
                         Forms\Components\TextInput::make('subtitle')
                             ->required()
                             ->maxLength(255)
-                            ->label('Subtitle'),
+                            ->label('Subtitle (English)'),
                         
                         Forms\Components\FileUpload::make('image')
                             ->label('Slide Image')
@@ -90,6 +98,11 @@ class SliderResource extends Resource
                     ->label('Image')
                     ->circular()
                     ->size(50),
+                
+                Tables\Columns\TextColumn::make('translation_key')
+                    ->label('Translation Key')
+                    ->searchable()
+                    ->sortable(),
                 
                 Tables\Columns\TextColumn::make('title')
                     ->searchable()

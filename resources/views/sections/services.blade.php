@@ -11,8 +11,24 @@
             <div class="sec-title__shape wow fadeInUp" data-wow-delay="100ms" data-wow-duration="1500ms">
                 <img class="float-bob-y" src="{{ asset('assets/images/shapes/sec-title-shape-1.png') }}" alt="Decorative shape">
             </div>
-            <h2 class="wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">Our Services</h2>
-            <p class="wow fadeInUp" data-wow-delay="300ms" data-wow-duration="1500ms">Professional solutions for your business needs</p>
+            <h2 class="wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+                @if(session('locale') === 'de')
+                    Unsere Dienstleistungen
+                @elseif(session('locale') === 'fr')
+                    Nos Services
+                @else
+                    Our Services
+                @endif
+            </h2>
+            <p class="wow fadeInUp" data-wow-delay="300ms" data-wow-duration="1500ms">
+                @if(session('locale') === 'de')
+                    Professionelle Lösungen für Ihre Geschäftsanforderungen
+                @elseif(session('locale') === 'fr')
+                    Solutions professionnelles pour vos besoins commerciaux
+                @else
+                    Professional solutions for your business needs
+                @endif
+            </p>
         </div>
 
         @if($services->count() > 0)
@@ -35,10 +51,10 @@
                         <div class="round-box"></div>
                     </div>
                     <div class="title-box">
-                        <h3><a href="{{ route('service.show', $service->id) }}">{{ $service->title }}</a></h3>
+                        <h3><a href="{{ route('service.show', $service->id) }}">{{ $service->translated_title }}</a></h3>
                     </div>
                     <div class="text">
-                        <p>{{ \Illuminate\Support\Str::limit($service->description, 120) }}</p>
+                        <p>{{ \Illuminate\Support\Str::limit($service->translated_description, 120) }}</p>
                     </div>
                     <div class="btn-box mt-3">
                         <a href="{{ route('service.show', $service->id) }}"><i class="icon-plus"></i></a>
@@ -53,7 +69,13 @@
         <div class="service-view-all text-center wow fadeInUp" data-wow-delay="700ms" data-wow-duration="1500ms">
             <a href="{{ route('home') }}#services" class="btn-one">
                 <span class="txt">
-                    View All Services
+                    @if(session('locale') === 'de')
+                        Alle Dienstleistungen anzeigen
+                    @elseif(session('locale') === 'fr')
+                        Voir tous les services
+                    @else
+                        View All Services
+                    @endif
                     <i class="fas fa-plus"></i>
                 </span>
             </a>
@@ -61,7 +83,15 @@
         @else
         <!-- No Services Message -->
         <div class="text-center py-5 wow fadeInUp" data-wow-delay="100ms" data-wow-duration="1500ms">
-            <p>No services available yet. Add services from the admin panel.</p>
+            <p>
+                @if(session('locale') === 'de')
+                    Noch keine Dienstleistungen verfügbar. Fügen Sie Dienstleistungen vom Admin-Panel hinzu.
+                @elseif(session('locale') === 'fr')
+                    Aucun service disponible pour le moment. Ajoutez des services depuis le panneau d'administration.
+                @else
+                    No services available yet. Add services from the admin panel.
+                @endif
+            </p>
         </div>
         @endif
     </div>

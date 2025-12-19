@@ -13,15 +13,22 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center text-white">
-                <nav class="breadcrumb-nav mb-4">
-                    <a href="{{ route('home') }}" class="text-white-50 me-2">Home</a>
-                    <span class="text-white-50 me-2">/</span>
-                    <span class="text-white">{{ $project->category }}</span>
-                </nav>
-                <h1 class="display-4 fw-bold mb-3 text-white">{{ $project->title }}</h1>
-                <p class="lead mb-4">{{ $project->slogan }}</p>
-                <span class="badge bg-primary px-3 py-2 fs-6">{{ $project->category }}</span>
-            </div>
+               <nav class="breadcrumb-nav mb-4">
+    <a href="{{ route('home') }}" class="text-white-50 me-2">
+        @if(session('locale') === 'de')
+            Startseite
+        @elseif(session('locale') === 'fr')
+            Accueil
+        @else
+            Home
+        @endif
+    </a>
+    <span class="text-white-50 me-2">/</span>
+    <span class="text-white">{{ $project->translated_category }}</span>
+</nav>
+<h1 class="display-4 fw-bold mb-3 text-white">{{ $project->translated_title }}</h1>
+<p class="lead mb-4">{{ $project->translated_slogan }}</p>
+<span class="badge bg-primary px-3 py-2 fs-6">{{ $project->translated_category }}</span>
         </div>
     </div>
 </section>
@@ -35,13 +42,12 @@
                 <div class="project-gallery">
                     <div class="main-image mb-4">
                         <img src="{{ Storage::url($project->image_1) }}" 
-                             alt="{{ $project->title }}" 
-                             class="img-fluid rounded shadow">
-                    </div>
-                    <div class="secondary-image">
-                        <img src="{{ Storage::url($project->image_2) }}" 
-                             alt="{{ $project->title }} - Additional" 
-                             class="img-fluid rounded shadow">
+     alt="{{ $project->translated_title }}" 
+     class="img-fluid rounded shadow">
+
+<img src="{{ Storage::url($project->image_2) }}" 
+     alt="{{ $project->translated_title }} - Additional" 
+     class="img-fluid rounded shadow">
                     </div>
                 </div>
             </div>
@@ -49,29 +55,59 @@
             <!-- Project Content -->
             <div class="col-lg-6">
                 <div class="project-content">
-                    <h2 class="h3 mb-4">Project Overview</h2>
-                    <div class="description mb-5">
-                        {!! $project->description !!}
-                    </div>
-                    
-                    <!-- Project Meta -->
-                    <div class="project-meta bg-light p-4 rounded">
-                        <h4 class="h5 mb-3">Project Details</h4>
-                        <ul class="list-unstyled mb-0">
-                            <li class="mb-2">
-                                <strong>Category:</strong> 
-                                <span class="badge bg-primary ms-2">{{ $project->category }}</span>
-                            </li>
-                           
-                        </ul>
-                    </div>
-                    
-                    <!-- Back Button -->
-                    <div class="mt-5">
-                        <a href="{{ route('home') }}#projects" class="btn btn-outline-primary">
-                            <i class="fas fa-arrow-left me-2"></i> Back to Projects
-                        </a>
-                    </div>
+                    <h2 class="h3 mb-4">
+    @if(session('locale') === 'de')
+        Projektübersicht
+    @elseif(session('locale') === 'fr')
+        Aperçu du projet
+    @else
+        Project Overview
+    @endif
+</h2>
+<div class="description mb-5">
+    {!! $project->translated_description !!}
+</div>
+
+<!-- Project Meta -->
+<div class="project-meta bg-light p-4 rounded">
+    <h4 class="h5 mb-3">
+        @if(session('locale') === 'de')
+            Projektdetails
+        @elseif(session('locale') === 'fr')
+            Détails du projet
+        @else
+            Project Details
+        @endif
+    </h4>
+    <ul class="list-unstyled mb-0">
+        <li class="mb-2">
+            <strong>
+                @if(session('locale') === 'de')
+                    Kategorie:
+                @elseif(session('locale') === 'fr')
+                    Catégorie:
+                @else
+                    Category:
+                @endif
+            </strong> 
+            <span class="badge bg-primary ms-2">{{ $project->translated_category }}</span>
+        </li>
+    </ul>
+</div>
+
+<!-- Back Button -->
+<div class="mt-5">
+    <a href="{{ route('home') }}#projects" class="btn btn-outline-primary">
+        <i class="fas fa-arrow-left me-2"></i>
+        @if(session('locale') === 'de')
+            Zurück zu Projekten
+        @elseif(session('locale') === 'fr')
+            Retour aux projets
+        @else
+            Back to Projects
+        @endif
+    </a>
+</div>
                 </div>
             </div>
         </div>

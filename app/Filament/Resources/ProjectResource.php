@@ -18,33 +18,92 @@ class ProjectResource extends Resource
 
     protected static ?string $navigationGroup = 'Content';
 
+    protected static ?string $navigationLabel = 'Projects';
+
+    protected static ?int $navigationSort = 4;
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Project Information')
-                    ->schema([
-                        Forms\Components\TextInput::make('title')
-                            ->required()
-                            ->maxLength(255),
-                        
-                        Forms\Components\TextInput::make('slogan')
-                            ->required()
-                            ->maxLength(255)
-                            ->label('Tagline/Slogan'),
-                        
-                        // Changed from Select to TextInput for free text entry
-                        Forms\Components\TextInput::make('category')
-                            ->required()
-                            ->maxLength(100)
-                            ->label('Category')
-                            ->placeholder('e.g., Software Solutions, EcoKos, Infrastructure')
-                            ->helperText('Enter any category name'),
-                        
-                        Forms\Components\RichEditor::make('description')
-                            ->required()
-                            ->columnSpanFull(),
-                    ]),
+                Forms\Components\Tabs::make('Translations')
+                    ->tabs([
+                        // English Tab
+                        Forms\Components\Tabs\Tab::make('English')
+                            ->icon('heroicon-o-flag')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->label('Project Title (English)'),
+                                
+                                Forms\Components\TextInput::make('slogan')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->label('Tagline/Slogan (English)'),
+                                
+                                Forms\Components\TextInput::make('category')
+                                    ->required()
+                                    ->maxLength(100)
+                                    ->label('Category (English)')
+                                    ->default('Software solutions'),
+                                
+                                Forms\Components\RichEditor::make('description')
+                                    ->required()
+                                    ->label('Description (English)')
+                                    ->columnSpanFull(),
+                            ]),
+                            
+                        // German Tab
+                        Forms\Components\Tabs\Tab::make('German')
+                            ->icon('heroicon-o-flag')
+                            ->schema([
+                                Forms\Components\TextInput::make('title_german')
+                                    ->maxLength(255)
+                                    ->label('Project Title (German)')
+                                    ->placeholder('Enter German translation'),
+                                
+                                Forms\Components\TextInput::make('slogan_german')
+                                    ->maxLength(255)
+                                    ->label('Tagline/Slogan (German)')
+                                    ->placeholder('Enter German translation'),
+                                
+                                Forms\Components\TextInput::make('category_german')
+                                    ->maxLength(100)
+                                    ->label('Category (German)')
+                                    ->placeholder('Enter German translation'),
+                                
+                                Forms\Components\RichEditor::make('description_german')
+                                    ->label('Description (German)')
+                                    ->placeholder('Enter German translation')
+                                    ->columnSpanFull(),
+                            ]),
+                            
+                        // French Tab
+                        Forms\Components\Tabs\Tab::make('French')
+                            ->icon('heroicon-o-flag')
+                            ->schema([
+                                Forms\Components\TextInput::make('title_french')
+                                    ->maxLength(255)
+                                    ->label('Project Title (French)')
+                                    ->placeholder('Enter French translation'),
+                                
+                                Forms\Components\TextInput::make('slogan_french')
+                                    ->maxLength(255)
+                                    ->label('Tagline/Slogan (French)')
+                                    ->placeholder('Enter French translation'),
+                                
+                                Forms\Components\TextInput::make('category_french')
+                                    ->maxLength(100)
+                                    ->label('Category (French)')
+                                    ->placeholder('Enter French translation'),
+                                
+                                Forms\Components\RichEditor::make('description_french')
+                                    ->label('Description (French)')
+                                    ->placeholder('Enter French translation')
+                                    ->columnSpanFull(),
+                            ]),
+                    ])->columnSpanFull(),
                 
                 Forms\Components\Section::make('Project Images')
                     ->schema([
@@ -71,20 +130,21 @@ class ProjectResource extends Resource
                                 fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
                                     ->prepend('project-secondary-'),
                             ),
-                    ])
-                    ->columns(2),
+                    ])->columns(2),
                 
                 Forms\Components\Section::make('Settings')
                     ->schema([
                         Forms\Components\TextInput::make('order')
                             ->numeric()
-                            ->default(0),
+                            ->default(0)
+                            ->label('Sort Order')
+                            ->helperText('Lower numbers appear first'),
                         
                         Forms\Components\Toggle::make('is_published')
                             ->label('Published')
-                            ->default(true),
-                    ])
-                    ->columns(2),
+                            ->default(true)
+                            ->helperText('Show this project on the website'),
+                    ])->columns(2),
             ]);
     }
 
@@ -94,43 +154,52 @@ class ProjectResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('image_1')
                     ->label('Image')
-                    ->circular(),
+                    ->circular()
+                    ->size(50),
                 
                 Tables\Columns\TextColumn::make('title')
+                    ->label('English Title')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->limit(30),
                 
-                // Updated to show category as regular text instead of badge with colors
+                Tables\Columns\TextColumn::make('title_german')
+                    ->label('German Title')
+                    ->searchable()
+                    ->sortable()
+                    ->limit(30)
+                    ->toggleable(isToggledHiddenByDefault: true),
+                
+                Tables\Columns\TextColumn::make('title_french')
+                    ->label('French Title')
+                    ->searchable()
+                    ->sortable()
+                    ->limit(30)
+                    ->toggleable(isToggledHiddenByDefault: true),
+                
                 Tables\Columns\TextColumn::make('category')
                     ->searchable()
                     ->sortable()
-                    ->limit(20),
+                    ->label('Category'),
                 
                 Tables\Columns\IconColumn::make('is_published')
                     ->label('Published')
-                    ->boolean(),
+                    ->boolean()
+                    ->sortable(),
                 
                 Tables\Columns\TextColumn::make('order')
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Order'),
                 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->defaultSort('order')
             ->filters([
-                // Removed the category filter since it's free text now
-                // Or keep it as a simple text filter:
-                Tables\Filters\Filter::make('category')
-                    ->form([
-                        Forms\Components\TextInput::make('category')
-                            ->label('Filter by Category')
-                    ])
-                    ->query(function ($query, array $data) {
-                        if (!empty($data['category'])) {
-                            $query->where('category', 'like', '%' . $data['category'] . '%');
-                        }
-                    })
+                Tables\Filters\TernaryFilter::make('is_published')
+                    ->label('Published'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -141,6 +210,11 @@ class ProjectResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [];
     }
 
     public static function getPages(): array

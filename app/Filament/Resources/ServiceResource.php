@@ -26,29 +26,74 @@ class ServiceResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Service Information')
-                    ->schema([
-                        Forms\Components\TextInput::make('title')
-                            ->required()
-                            ->maxLength(255)
-                            ->label('Service Title'),
-                        
-                        Forms\Components\TextInput::make('slug')
-                            ->required()
-                            ->maxLength(255)
-                            ->label('URL Slug')
-                            ->helperText('URL-friendly version of title (e.g., translation-services)'),
-                        
-                        Forms\Components\Textarea::make('description')
-                            ->rows(3)
-                            ->label('Short Description')
-                            ->helperText('Brief description for service cards'),
-                        
-                        Forms\Components\RichEditor::make('content')
-                            ->label('Full Content')
-                            ->columnSpanFull()
-                            ->helperText('Detailed content for service detail page'),
-                    ]),
+                Forms\Components\Tabs::make('Translations')
+                    ->tabs([
+                        // English Tab
+                        Forms\Components\Tabs\Tab::make('English')
+                            ->icon('heroicon-o-flag')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->label('Service Title (English)'),
+                                
+                                Forms\Components\TextInput::make('slug')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->label('URL Slug')
+                                    ->helperText('URL-friendly version of title (e.g., translation-services)'),
+                                
+                                Forms\Components\Textarea::make('description')
+                                    ->rows(3)
+                                    ->label('Short Description (English)')
+                                    ->helperText('Brief description for service cards'),
+                                
+                                Forms\Components\RichEditor::make('content')
+                                    ->label('Full Content (English)')
+                                    ->columnSpanFull()
+                                    ->helperText('Detailed content for service detail page'),
+                            ]),
+                            
+                        // German Tab
+                        Forms\Components\Tabs\Tab::make('German')
+                            ->icon('heroicon-o-flag')
+                            ->schema([
+                                Forms\Components\TextInput::make('title_german')
+                                    ->maxLength(255)
+                                    ->label('Service Title (German)')
+                                    ->placeholder('Enter German translation'),
+                                
+                                Forms\Components\Textarea::make('description_german')
+                                    ->rows(3)
+                                    ->label('Short Description (German)')
+                                    ->placeholder('Enter German translation'),
+                                
+                                Forms\Components\RichEditor::make('content_german')
+                                    ->label('Full Content (German)')
+                                    ->columnSpanFull()
+                                    ->placeholder('Enter German translation'),
+                            ]),
+                            
+                        // French Tab
+                        Forms\Components\Tabs\Tab::make('French')
+                            ->icon('heroicon-o-flag')
+                            ->schema([
+                                Forms\Components\TextInput::make('title_french')
+                                    ->maxLength(255)
+                                    ->label('Service Title (French)')
+                                    ->placeholder('Enter French translation'),
+                                
+                                Forms\Components\Textarea::make('description_french')
+                                    ->rows(3)
+                                    ->label('Short Description (French)')
+                                    ->placeholder('Enter French translation'),
+                                
+                                Forms\Components\RichEditor::make('content_french')
+                                    ->label('Full Content (French)')
+                                    ->columnSpanFull()
+                                    ->placeholder('Enter French translation'),
+                            ]),
+                    ])->columnSpanFull(),
                 
                 Forms\Components\Section::make('Service Media')
                     ->schema([
@@ -102,9 +147,24 @@ class ServiceResource extends Resource
                     ->size(40),
                 
                 Tables\Columns\TextColumn::make('title')
+                    ->label('English Title')
                     ->searchable()
                     ->sortable()
                     ->limit(30),
+                
+                Tables\Columns\TextColumn::make('title_german')
+                    ->label('German Title')
+                    ->searchable()
+                    ->sortable()
+                    ->limit(30)
+                    ->toggleable(isToggledHiddenByDefault: true),
+                
+                Tables\Columns\TextColumn::make('title_french')
+                    ->label('French Title')
+                    ->searchable()
+                    ->sortable()
+                    ->limit(30)
+                    ->toggleable(isToggledHiddenByDefault: true),
                 
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable()

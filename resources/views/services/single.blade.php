@@ -167,14 +167,14 @@
                     <div class="col-xl-12">
                         <div class="inner-content">
                             <div class="title">
-                                <h2>{{ $service->title }}</h2>
-                            </div>
-                            <div class="breadcrumb-menu">
-                                <ul>
-                                    <li><a href="{{ url('/') }}">Home</a></li>
-                                    <li class="active">{{ $service->title }}</li>
-                                </ul>
-                            </div>
+    <h2>{{ $service->translated_title }}</h2>
+</div>
+<div class="breadcrumb-menu">
+    <ul>
+        <li><a href="{{ url('/') }}">Home</a></li>
+        <li class="active">{{ $service->translated_title }}</li>
+    </ul>
+</div>
                         </div>
                     </div>
                 </div>
@@ -191,19 +191,25 @@
                         <div class="service-details-page__content">
 
                             <div class="service-details-page__text1">
-                                <div class="top-title">
-                                    @if($service->icon)
-                                    <div class="icon-box">
-                                        <span class="{{ $service->icon }}"></span>
-                                        <div class="round-box"></div>
-                                    </div>
-                                    @endif
-                                    <h2>{{ $service->title }}</h2>
-                                </div>
-                                
-                                @if($service->description)
-                                <p>{{ $service->description }}</p>
-                                @endif
+                               <div class="top-title">
+    @if($service->icon)
+    <div class="icon-box">
+        <span class="{{ $service->icon }}"></span>
+        <div class="round-box"></div>
+    </div>
+    @endif
+    <h2>{{ $service->translated_title }}</h2>
+</div>
+
+@if($service->translated_description)
+<p>{{ $service->translated_description }}</p>
+@endif
+
+@if($service->translated_content)
+<div class="service-content">
+    {!! $service->translated_content !!}
+</div>
+@endif
                                 
                                 @if($service->content)
                                 <div class="service-content">

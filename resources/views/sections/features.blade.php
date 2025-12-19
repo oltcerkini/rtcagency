@@ -9,9 +9,9 @@
     <div class="features-style1__top-border"></div>
     <div class="features-style1__shape1 wow slideInLeft" data-wow-delay="100ms" data-wow-duration="2500ms">
         @if($feature->image)
-        <img class="float-bob-y" src="{{ Storage::url($feature->image) }}" alt="{{ $feature->title }}">
+        <img class="float-bob-y" src="{{ Storage::url($feature->image) }}" alt="{{ $feature->translated_title }}">
         @else
-        <img class="float-bob-y" src="{{ asset('assets/images/businessman-working-together-office.jpg') }}" alt="{{ $feature->title }}">
+        <img class="float-bob-y" src="{{ asset('assets/images/businessman-working-together-office.jpg') }}" alt="{{ $feature->translated_title }}">
         @endif
     </div>
     <div class="container">
@@ -19,11 +19,35 @@
             <div class="col-xl-7">
                 <div class="features-style1__content">
                     <div class="top-title">
-                        <h2>{{ $feature->title }}</h2>
-                        <p>{{ $feature->description }}</p>
+                        <h2>{{ $feature->translated_title }}</h2>
+                        <p>{{ $feature->translated_description }}</p>
                     </div>
                     <ul>
-                        @foreach($feature->bullets as $index => $bullet)
+                        @php
+                            // Get translated bullets array using the model's accessor
+                            $translatedBullets = [
+                                [
+                                    'number' => '01.',
+                                    'title' => $feature->translated_bullet_title_1,
+                                    'description' => $feature->translated_bullet_description_1,
+                                    'icon' => $feature->icon_1
+                                ],
+                                [
+                                    'number' => '02.',
+                                    'title' => $feature->translated_bullet_title_2,
+                                    'description' => $feature->translated_bullet_description_2,
+                                    'icon' => $feature->icon_2
+                                ],
+                                [
+                                    'number' => '03.',
+                                    'title' => $feature->translated_bullet_title_3,
+                                    'description' => $feature->translated_bullet_description_3,
+                                    'icon' => $feature->icon_3
+                                ]
+                            ];
+                        @endphp
+                        
+                        @foreach($translatedBullets as $index => $bullet)
                         <li>
                             <div class="inner">
                                 <div class="counting-box">{{ $bullet['number'] }}</div>
@@ -57,7 +81,7 @@
                     <div class="box four"></div>
                     <div class="features-style1__img-inner">
                         @if($feature->image)
-                        <img src="{{ Storage::url($feature->image) }}" alt="{{ $feature->title }}">
+                        <img src="{{ Storage::url($feature->image) }}" alt="{{ $feature->translated_title }}">
                         @else
                         <img src="{{ asset('assets/images/team.jpg') }}" alt="Professional Language Services Team">
                         @endif
@@ -77,8 +101,24 @@
             <div class="col-xl-7">
                 <div class="features-style1__content">
                     <div class="top-title">
-                        <h2>Add features from admin panel</h2>
-                        <p>Go to Filament admin to add feature content</p>
+                        <h2>
+                            @if(session('locale') === 'de')
+                                Funktionen vom Admin-Panel hinzufügen
+                            @elseif(session('locale') === 'fr')
+                                Ajouter des fonctionnalités depuis le panneau d'administration
+                            @else
+                                Add features from admin panel
+                            @endif
+                        </h2>
+                        <p>
+                            @if(session('locale') === 'de')
+                                Gehen Sie zum Filament-Admin, um Feature-Inhalte hinzuzufügen
+                            @elseif(session('locale') === 'fr')
+                                Allez dans l'admin Filament pour ajouter du contenu de fonctionnalité
+                            @else
+                                Go to Filament admin to add feature content
+                            @endif
+                        </p>
                     </div>
                 </div>
             </div>

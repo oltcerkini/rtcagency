@@ -31,13 +31,13 @@
                 </div>
                 <div class="main-slider-style1__gradient-bg"></div>
                 <div class="shape1 wow slideInLeft" data-wow-delay="100ms" data-wow-duration="2500ms">
-                    <img class="float-bob-y" src="{{ Storage::url($slide->image) }}" alt="{{ $slide->title }}">
+                    <img class="float-bob-y" src="{{ Storage::url($slide->image) }}" alt="{{ $slide->translated_title }}">
                 </div>
                 <div class="shape2 wow slideInUp" data-wow-delay="100ms" data-wow-duration="2500ms">
-                    <img class="float-bob-x" src="{{ Storage::url($slide->image) }}" alt="{{ $slide->title }}">
+                    <img class="float-bob-x" src="{{ Storage::url($slide->image) }}" alt="{{ $slide->translated_title }}">
                 </div>
                 <div class="shape3 wow slideInUp" data-wow-delay="100ms" data-wow-duration="2500ms">
-                    <img class="float-bob" src="{{ Storage::url($slide->image) }}" alt="{{ $slide->title }}">
+                    <img class="float-bob" src="{{ Storage::url($slide->image) }}" alt="{{ $slide->translated_title }}">
                 </div>
                 <div class="container">
                     <div class="row">
@@ -46,12 +46,12 @@
                                 <div class="main-slider-content__inner">
                                     <div class="big-title">
                                         <h2>
-                                            {!! nl2br(e($slide->title)) !!}
+                                            {!! nl2br(e($slide->translated_title)) !!}
                                         </h2>
                                     </div>
                                     <div class="text">
                                         <p>
-                                            {{ $slide->subtitle }}
+                                            {{ $slide->translated_subtitle }}
                                         </p>
                                     </div>
                                     @if($slide->button_text && $slide->button_link)
@@ -101,12 +101,24 @@
                                 <div class="main-slider-content__inner">
                                     <div class="big-title">
                                         <h2>
-                                            Add slides from admin panel
+                                            @if(session('locale') === 'de')
+                                                Folien vom Admin-Panel hinzufügen
+                                            @elseif(session('locale') === 'fr')
+                                                Ajouter des diapositives depuis le panneau d'administration
+                                            @else
+                                                Add slides from admin panel
+                                            @endif
                                         </h2>
                                     </div>
                                     <div class="text">
                                         <p>
-                                            Go to Filament admin to add slider content
+                                            @if(session('locale') === 'de')
+                                                Gehen Sie zum Filament-Admin, um Slider-Inhalte hinzuzufügen
+                                            @elseif(session('locale') === 'fr')
+                                                Allez dans l'admin Filament pour ajouter du contenu de diaporama
+                                            @else
+                                                Go to Filament admin to add slider content
+                                            @endif
                                         </p>
                                     </div>
                                 </div>

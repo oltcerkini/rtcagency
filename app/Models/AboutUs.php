@@ -41,7 +41,7 @@ class AboutUs extends Model
     // Helper methods to get translated content
     public function getTranslatedTitleAttribute()
     {
-        $locale = app()->getLocale();
+        $locale = session('locale', 'en'); // Changed to use session
         
         return match($locale) {
             'de' => $this->title_german ?? $this->title,
@@ -52,7 +52,7 @@ class AboutUs extends Model
     
     public function getTranslatedDescription1Attribute()
     {
-        $locale = app()->getLocale();
+        $locale = session('locale', 'en'); // Changed to use session
         
         return match($locale) {
             'de' => $this->description1_german ?? $this->description1,
@@ -63,7 +63,7 @@ class AboutUs extends Model
     
     public function getTranslatedDescription2Attribute()
     {
-        $locale = app()->getLocale();
+        $locale = session('locale', 'en'); // Changed to use session
         
         return match($locale) {
             'de' => $this->description2_german ?? $this->description2,

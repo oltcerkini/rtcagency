@@ -11,14 +11,20 @@ class Service extends Model
 
     protected $fillable = [
         'title',
-        'slug',           // Your table has this
+        'title_german',      // Added
+        'title_french',      // Added
+        'slug',
         'description',
-        'content',        // Your table has this
-        'icon',           // Your table has this
-        'image',          // Your table has this
-        'sort_order',     // Your table has this
-        'is_active',      // Your table has this
-        'featured'        // Your table has this
+        'description_german', // Added
+        'description_french', // Added
+        'content',
+        'content_german',    // Added
+        'content_french',    // Added
+        'icon',
+        'image',
+        'sort_order',
+        'is_active',
+        'featured'
     ];
 
     protected $casts = [
@@ -26,7 +32,7 @@ class Service extends Model
         'featured' => 'boolean'
     ];
 
-    // Scopes using YOUR column names
+    // Scopes
     public function scopePublished($query)
     {
         return $query->where('is_active', true);
@@ -40,5 +46,39 @@ class Service extends Model
     public function scopeOrdered($query)
     {
         return $query->orderBy('sort_order')->orderBy('created_at', 'desc');
+    }
+    
+    // Translation accessors
+    public function getTranslatedTitleAttribute()
+    {
+        $locale = session('locale', 'en');
+        
+        return match($locale) {
+            'de' => $this->title_german ?? $this->title,
+            'fr' => $this->title_french ?? $this->title,
+            default => $this->title,
+        };
+    }
+    
+    public function getTranslatedDescriptionAttribute()
+    {
+        $locale = session('locale', 'en');
+        
+        return match($locale) {
+            'de' => $this->description_german ?? $this->description,
+            'fr' => $this->description_french ?? $this->description,
+            default => $this->description,
+        };
+    }
+    
+    public function getTranslatedContentAttribute()
+    {
+        $locale = session('locale', 'en');
+        
+        return match($locale) {
+            'de' => $this->content_german ?? $this->content,
+            'fr' => $this->content_french ?? $this->content,
+            default => $this->content,
+        };
     }
 }
