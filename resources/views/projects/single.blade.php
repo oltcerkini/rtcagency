@@ -18,7 +18,7 @@
                     <span class="text-white-50 me-2">/</span>
                     <span class="text-white">{{ $project->category }}</span>
                 </nav>
-                <h1 class="display-4 fw-bold mb-3">{{ $project->title }}</h1>
+                <h1 class="display-4 fw-bold mb-3 text-white">{{ $project->title }}</h1>
                 <p class="lead mb-4">{{ $project->slogan }}</p>
                 <span class="badge bg-primary px-3 py-2 fs-6">{{ $project->category }}</span>
             </div>
@@ -87,33 +87,6 @@
         ->get();
 @endphp
 
-@if($relatedProjects->count() > 0)
-<section class="related-projects bg-light py-5">
-    <div class="container">
-        <h2 class="text-center mb-5">Related Projects</h2>
-        <div class="row">
-            @foreach($relatedProjects as $related)
-            <div class="col-md-6">
-                <div class="card border-0 shadow-sm h-100">
-                    <img src="{{ Storage::url($related->image_1) }}" 
-                         class="card-img-top" 
-                         alt="{{ $related->title }}"
-                         style="height: 200px; object-fit: cover;">
-                    <div class="card-body">
-                        <span class="badge bg-primary mb-2">{{ $related->category }}</span>
-                        <h5 class="card-title">{{ $related->title }}</h5>
-                        <p class="card-text text-muted">{{ \Illuminate\Support\Str::limit($related->slogan, 100) }}</p>
-                        <a href="{{ route('project.show', $related->id) }}" class="btn btn-sm btn-primary">
-                            View Details
-                        </a>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-@endif
 
 <style>
     .project-hero {
