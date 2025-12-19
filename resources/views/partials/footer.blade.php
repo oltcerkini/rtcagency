@@ -27,19 +27,20 @@
     </div>
     <!--End Footer Main-->
 
-    <!--Start Footer Bottom-->
-    <div class="footer-bottom">
-        <div class="container">
-            <div class="bottom-inner">
-                <div class="copyright-text">
-                    <p>
-                        &copy; Copyright {{ date('Y') }}
-                        <a href="{{ route('home') }}">DIV Group</a>
-                        - All Rights Reserved.
-                    </p>
-                </div>
+   <!--Start Footer Bottom-->
+<div class="footer-bottom">
+    <div class="container">
+        <div class="bottom-inner">
+            <div class="copyright-text">
+                <p>
+                    {!! __('footer.copyright', [
+                        'year' => date('Y'),
+                        'home_url' => route('home')
+                    ]) !!}
+                </p>
             </div>
         </div>
     </div>
-    <!--End Footer Bottom-->
+</div>
+<!--End Footer Bottom-->
 </footer>

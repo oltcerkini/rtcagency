@@ -3,7 +3,7 @@
     data-wow-duration="1500ms">
     <div class="single-footer-widget marbtm">
         <div class="title">
-            <h3>About us</h3>
+            <h3>{{ __('footer.about_us') }}</h3>
         </div>
         <div class="our-company-info">
             <div class="footer-logo-style1">
@@ -22,33 +22,33 @@
     data-wow-duration="1500ms">
     <div class="single-footer-widget marbtm single-footer-widget--link-box">
         <div class="title">
-            <h3>Useful Links</h3>
+            <h3>{{ __('footer.useful_links') }}</h3>
         </div>
         <div class="footer-widget-links">
             <ul>
                 <li>
                     <a href="{{ route('home') }}">
                         <span class="icon-right-arrow"></span>
-                        Home
+                        {{ __('footer.home') }}
                     </a>
                 </li>
                 <li>
                     <a href="#about-us">
                         <span class="icon-right-arrow"></span>
-                        About Us
+                        {{ __('footer.about_us') }}
                     </a>
                 </li>
                 
                 <li>
                     <a href="{{ route('contact') }}">
                         <span class="icon-right-arrow"></span>
-                        Contact Us
+                        {{ __('footer.contact_us') }}
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <span class="icon-right-arrow"></span>
-                        Privacy Policy
+                        {{ __('footer.privacy_policy') }}
                     </a>
                 </li>
             </ul>
@@ -62,7 +62,7 @@
     data-wow-duration="1500ms">
     <div class="single-footer-widget single-footer-widget--link-box margin-left-minus">
         <div class="title">
-            <h3>Our Services</h3>
+            <h3>{{ __('footer.our_services') }}</h3>
         </div>
         <div class="footer-widget-links">
             <ul>
@@ -77,7 +77,7 @@
         <li>
             <a href="{{ route('service.show', $service->id) }}">
                 <span class="icon-right-arrow"></span>
-                {{ $service->title }}
+                {{ $service->translated_title }}
             </a>
         </li>
     @endforeach
@@ -92,16 +92,18 @@
     data-wow-duration="1500ms">
     <div class="single-footer-widget martop">
         <div class="title">
-            <h3>Information</h3>
+            <h3>{{ __('footer.information') }}</h3>
         </div>
         <div class="footer-widget-contact-info">
             <ul>
-                <li><a href="mailto:info.moscot@gmail.com">info.Moscot@gmail.com</a></li>
-                <li><a href="tel:2512353256">Call Me (+55) -66 99 88</a></li>
+                <li><a href="mailto:{{ __('footer.email') }}">{{ __('footer.email') }}</a></li>
+                <li><a href="tel:{{ str_replace(' ', '', __('footer.phone_number')) }}">{{ __('footer.call_me') }} {{ __('footer.phone_number') }}</a></li>
             </ul>
+            @if(!empty(trim(__('footer.address'))))
             <div class="text">
-                <p>Sydney Harbor Bridge Circular City<br> of Sydney, Australia.</p>
+                <p>{!! __('footer.address') !!}</p>
             </div>
+            @endif
         </div>
     </div>
 </div>
@@ -115,12 +117,11 @@
 
             <div class="footer-menu">
                 <ul>
-                   
                     <li>
-                        <a href="{{ route('contact') }}">Contact Us</a>
+                        <a href="{{ route('contact') }}">{{ __('footer.contact_us') }}</a>
                     </li>
                     <li>
-                        <a href="#">Privacy Policy</a>
+                        <a href="#">{{ __('footer.privacy_policy') }}</a>
                     </li>
                 </ul>
             </div>
@@ -128,17 +129,17 @@
             <div class="footer-social-link">
                 <ul class="clearfix">
                     <li>
-                        <a href="#">
+                        <a href="https://www.facebook.com/share/1WhmRgcviv/" target="_blank" rel="noopener noreferrer" title="Facebook">
                             <i class="icon-facebook"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="https://www.linkedin.com/company/rtc-telecommunications/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
                             <i class="icon-linkedin"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="https://www.instagram.com/rtelecommunication?igsh=MWJkbmFqcHZrcDZobg==" target="_blank" rel="noopener noreferrer" title="Instagram">
                             <i class="icon-instagram-1"></i>
                         </a>
                     </li>
