@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\ContactController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -18,6 +19,8 @@ Route::get('/', function () {
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
+
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // =========== SERVICES (EXACTLY LIKE PROJECTS) ===========
 Route::get('/service/{id}', [ServiceController::class, 'show'])->name('service.show');

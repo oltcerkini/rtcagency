@@ -14,13 +14,13 @@
                             <div class="icon">
                                 <span class="icon-phone"></span>
                             </div>
-                            Call Me: <a href="tel:2512353256">(1)245-45678</a>
+                            Call Me: <a href="tel:2512353256">+383 43 873 054</a>
                         </li>
                         <li>
                             <div class="icon">
                                 <span class="icon-envelop"></span>
                             </div>
-                            Mail Me: <a href="mailto:help.info@gmail.com">Help.info@gmail.com</a>
+                            Mail Me: <a href="mailto:cooperation@rtelecommunication.com">cooperation@rtelecommunication.com</a>
                         </li>
                     </ul>
                 </div><!-- /.header-contact-info-style1 -->
